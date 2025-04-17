@@ -1,3 +1,18 @@
-<!-- inline -->
-<ngb-datepicker (dateSelect)="onDateSelect($event)"></ngb-datepicker>
-<p>Selected date: {{ date | date: 'MMMM d, y' }}</p>
+
+<!-- <p>Selected date: {{ date | date : "MMMM d, y" }}</p> -->
+<label for="todayDate">Selected Date</label>
+<!-- <input id="todayDate" type="text" ngbDatepicker (dateSelect)="onDateSelect($event)"/> -->
+<input id="todayDate" type="text" ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelect($event)"/>
+<button (click)="d.toggle()">Toggle</button>
+<!-- <ngb-datepicker (dateSelect)="onDateSelect($event)"></ngb-datepicker> -->
+
+<ng-container *ngFor="let coupon of couponList">
+  <div class="coupon">
+    <h2>{{ coupon.title }}</h2>
+    <p *ngIf="coupon.isExpired">[Expired]</p>
+    <p>{{ coupon.description }}</p>
+    <img src="{{ coupon.image }}" alt="Coupon Image" />
+    <p>Valid from: {{ coupon.start_date }} to {{ coupon.end_date }}</p>
+    <a href="{{ coupon.link }}">Get Coupon</a>
+  </div>
+</ng-container>
